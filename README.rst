@@ -74,6 +74,10 @@ UCI configuration options must go in ``/etc/config/openwisp``.
 - ``connect_timeout``: value passed to curl ``--connect-timeout`` argument, defaults to ``15``; see `curl connect-timeout argument <https://curl.haxx.se/docs/manpage.html#--connect-timeout>`_
 - ``max_time``: value passed to curl ``--max-time`` argument, defaults to ``30``; see `curl connect-timeout argument <https://curl.haxx.se/docs/manpage.html#-m>`_
 - ``mac_interface``: the interface from which the MAC address is taken when performing automatic registration, defaults to ``eth0``
+- ``curl_interface``: the value passed to curl ``--interface`` argument, it may have 3 different type of values:
+  - ``0``: disabled (default value)
+  - ``1``: enabled and automatically uses the value of the ``interface`` option
+  - ``<interface_name>``: explicit interface name, eg: ``br-wan``
 - ``pre_reload_hook``: path to custom executable script, see `pre-reload-hook`_
 
 Automatic registration

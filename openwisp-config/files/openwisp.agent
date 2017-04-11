@@ -20,6 +20,7 @@ while [ -n "$1" ]; do
 		--capath) export CAPATH="$2"; shift;;
 		--cacert) export CACERT="$2"; shift;;
 		--mac-interface) export MAC_INTERFACE="$2"; shift;;
+		--curl-interface) export CURL_INTERFACE="$2"; shift;;
 		--pre-reload-hook) export PRE_RELOAD_HOOK="$2"; shift;;
 		-*)
 			echo "Invalid option: $1"
@@ -69,7 +70,7 @@ STATUS_REPORT="$WORKING_DIR/status_report"
 APPLYING_CONF="$WORKING_DIR/applying_conf"
 REGISTRATION_URL="$URL/controller/register/"
 UNMANAGED_DIR="$WORKING_DIR/unmanaged"
-FETCH_COMMAND="curl -s --connect-timeout $CONNECT_TIMEOUT --max-time $MAX_TIME --interface $MAC_INTERFACE"
+FETCH_COMMAND="curl -s --connect-timeout $CONNECT_TIMEOUT --max-time $MAX_TIME"
 mkdir -p $WORKING_DIR
 mkdir -p $UNMANAGED_DIR
 
@@ -82,6 +83,13 @@ else
 	if [ -n "$CACERT" ]; then
 		FETCH_COMMAND="$FETCH_COMMAND --cacert $CACERT"
 	fi
+fi
+
+if [ "$CURL_INTERFACE" == "1" ]; then
+	CURL_INTERFACE="$MAC_INTERFACE"
+fi
+if [ -n "$CURL_INTERFACE" ] && [ "$CURL_INTERFACE" != "0" ]; then
+	FETCH_COMMAND="$FETCH_COMMAND --interface $CURL_INTERFACE"
 fi
 
 if [ -n "$UNMANAGED" ]; then
