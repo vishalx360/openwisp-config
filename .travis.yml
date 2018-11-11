@@ -7,7 +7,7 @@ env:
   - LUA="lua=5.1.5"
 
 before_install:
-  - sudo ./intall-dev.sh --ci
+  - ./intall-dev.sh
 install:
   - sudo luarocks install luacheck
   
